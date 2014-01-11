@@ -4,6 +4,8 @@
 
 Useful for making sure you didn't leave any logging in production code.
 
+Also available as a [gulp](https://github.com/sindresorhus/gulp-strip-debug) and [grunt](https://github.com/sindresorhus/grunt-strip-debug) task.
+
 
 ## Install
 
