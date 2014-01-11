@@ -1,0 +1,48 @@
+{
+  "name": "strip-debug",
+  "version": "0.0.0",
+  "description": "Strip console and debugger statements from JavaScript code",
+  "license": "MIT",
+  "bin": {
+    "strip-debug": "cli.js"
+  },
+  "repository": "sindresorhus/strip-debug",
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "http://sindresorhus.com"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
+  "keywords": [
+    "strip",
+    "remove",
+    "delete",
+    "clean",
+    "debug",
+    "debugger",
+    "console",
+    "log",
+    "logging",
+    "js",
+    "javascript",
+    "ecmascript",
+    "ast",
+    "esprima"
+  ],
+  "dependencies": {
+    "rocambole": "~0.3.1",
+    "rocambole-token": "~1.1.0"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  }
+}
