@@ -1,6 +1,6 @@
 {
   "name": "strip-debug",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Strip console and debugger statements from JavaScript code",
   "license": "MIT",
   "bin": {
