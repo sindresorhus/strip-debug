@@ -39,8 +39,9 @@
     "esprima"
   ],
   "dependencies": {
-    "rocambole": "~0.3.1",
-    "rocambole-token": "~1.1.0"
+    "rocambole": "^0.3.1",
+    "rocambole-strip-console": "^0.1.0",
+    "rocambole-strip-debugger": "^0.1.0"
   },
   "devDependencies": {
     "mocha": "*"

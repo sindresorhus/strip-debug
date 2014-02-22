@@ -9,29 +9,8 @@ Also available as a [gulp](https://github.com/sindresorhus/gulp-strip-debug) and
 
 ## Install
 
-Install locally with [npm](https://npmjs.org/package/strip-debug):
-
 ```
 npm install --save strip-debug
-```
-
-Or globally if you want to use it as a CLI app:
-
-```
-npm install --global strip-debug
-```
-
-You can then use it in your Terminal like:
-
-```
-strip-debug src/app.js > dist/app.js
-```
-
-Or pipe something to it:
-
-```
-echo 'function foo(){console.log("bar")' | strip-debug
-//=> function foo(){}
 ```
 
 
@@ -41,7 +20,7 @@ echo 'function foo(){console.log("bar")' | strip-debug
 var stripDebug = require('strip-debug');
 
 stripDebug('function foo(){console.log("bar");debugger;').toString();
-//=> function foo(){}
+//=> function foo(){void 0;}
 ```
 
 
@@ -53,11 +32,35 @@ Returns the modified [Esprima AST](http://esprima.org) which can be used to make
 
 Call `.toString()` to get the stringified output.
 
+To prevent any side-effects, `console.*` is replaced with `void 0` instead of being stripped.
+
 ### input
 
 Type: `String`|`Object`
 
 Pass in a string of JavaScript code or a [Esprima compatible AST](http://esprima.org).
+
+
+## CLI
+
+You can also use it as a CLI app by installing it globally:
+
+```bash
+npm install --global strip-debug
+```
+
+#### Usage
+
+```bash
+strip-debug src/app.js > dist/app.js
+```
+
+or pipe something to it:
+
+```bash
+echo 'function foo(){console.log("bar")' | strip-debug
+#=> function foo(){}
+```
 
 
 ## License
