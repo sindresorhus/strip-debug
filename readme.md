@@ -19,7 +19,7 @@ npm install --save strip-debug
 ```js
 var stripDebug = require('strip-debug');
 
-stripDebug('function foo(){console.log("bar");debugger;').toString();
+stripDebug('function foo(){console.log("bar");debugger;}').toString();
 //=> function foo(){void 0;}
 ```
 
@@ -58,7 +58,7 @@ strip-debug src/app.js > dist/app.js
 or pipe something to it:
 
 ```bash
-echo 'function foo(){console.log("bar")' | strip-debug
+echo 'function foo(){console.log("bar")}' | strip-debug
 #=> function foo(){}
 ```
 
