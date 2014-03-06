@@ -1,7 +1,7 @@
 {
   "name": "strip-debug",
   "version": "0.2.0",
-  "description": "Strip console and debugger statements from JavaScript code",
+  "description": "Strip console, alert, and debugger statements from JavaScript code",
   "license": "MIT",
   "bin": {
     "strip-debug": "cli.js"
@@ -41,7 +41,8 @@
   "dependencies": {
     "rocambole": "^0.3.1",
     "rocambole-strip-console": "^0.1.0",
-    "rocambole-strip-debugger": "^0.1.0"
+    "rocambole-strip-debugger": "^0.1.0",
+    "rocambole-strip-alert": "^0.1.0"
   },
   "devDependencies": {
     "mocha": "*"
