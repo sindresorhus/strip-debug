@@ -16,6 +16,15 @@ it('should strip console statement', function () {
 	assert.equal(stripDebug('if (foo) console.log("foo")\nnextLine();').toString(), 'if (foo) void 0\nnextLine();');
 });
 
+it('should strip alert statement', function () {
+	assert.equal(stripDebug('function test(){alert("foo");}').toString(), 'function test(){void 0;}');
+	assert.equal(stripDebug('function test(){window.alert("foo");}').toString(), 'function test(){void 0;}');
+	assert.equal(stripDebug('"use strict";alert("foo");foo()').toString(), '"use strict";void 0;foo()');
+	assert.equal(stripDebug('if(alert){alert("foo", "bar");}').toString(), 'if(alert){void 0;}');
+	assert.equal(stripDebug('foo && alert("foo");').toString(), 'foo && void 0;');
+	assert.equal(stripDebug('if (foo) alert("foo")\nnextLine();').toString(), 'if (foo) void 0\nnextLine();');
+});
+
 it('should never strip away non-debugging code', function () {
 	var t = 'var test = {\n    getReadSections: function(){\n        var readSections = window.localStorage.getItem(\'storyReadSections\') || \'[]\';\n        return JSON.parse(readSections);\n    }\n};';
 	assert.equal(stripDebug(t).toString(), t);
