@@ -1,16 +1,16 @@
-# strip-debug [![Build Status](https://secure.travis-ci.org/sindresorhus/strip-debug.png?branch=master)](http://travis-ci.org/sindresorhus/strip-debug)
+# strip-debug [![Build Status](https://travis-ci.org/sindresorhus/strip-debug.png?branch=master)](https://travis-ci.org/sindresorhus/strip-debug)
 
 > Strip `console`, `alert`, and `debugger` statements from JavaScript code
 
 Useful for making sure you didn't leave any logging in production code.
 
-Also available as [gulp](https://github.com/sindresorhus/gulp-strip-debug), [grunt](https://github.com/sindresorhus/grunt-strip-debug), [broccoli](https://github.com/sindresorhus/broccoli-strip-debug), plugins.
+Also available as [gulp](https://github.com/sindresorhus/gulp-strip-debug)/[grunt](https://github.com/sindresorhus/grunt-strip-debug)/[broccoli](https://github.com/sindresorhus/broccoli-strip-debug) plugins.
 
 
 ## Install
 
-```
-npm install --save strip-debug
+```bash
+$ npm install --save strip-debug
 ```
 
 
@@ -20,7 +20,7 @@ npm install --save strip-debug
 var stripDebug = require('strip-debug');
 
 stripDebug('function foo(){console.log("foo");alert("foo");debugger;}').toString();
-//=> function foo(){void 0;}
+//=> function foo(){void 0;void 0;}
 ```
 
 
@@ -36,7 +36,7 @@ To prevent any side-effects, `console.*`/`alert*` is replaced with `void 0` inst
 
 ### input
 
-Type: `String`|`Object`
+Type: `String`, `Object`
 
 Pass in a string of JavaScript code or a [Esprima compatible AST](http://esprima.org).
 
@@ -46,23 +46,23 @@ Pass in a string of JavaScript code or a [Esprima compatible AST](http://esprima
 You can also use it as a CLI app by installing it globally:
 
 ```bash
-npm install --global strip-debug
+$ npm install --global strip-debug
 ```
 
 #### Usage
 
 ```bash
-strip-debug src/app.js > dist/app.js
+$ strip-debug src/app.js > dist/app.js
 ```
 
 or pipe something to it:
 
 ```bash
-echo 'function foo(){console.log("bar")}' | strip-debug
+$ echo 'function foo(){console.log("bar")}' | strip-debug
 #=> function foo(){}
 ```
 
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+[MIT](http://opensource.org/licenses/MIT) © [Sindre Sorhus](http://sindresorhus.com)
