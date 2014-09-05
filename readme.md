@@ -7,14 +7,11 @@ Useful for making sure you didn't leave any logging in production code.
 Also available as [gulp](https://github.com/sindresorhus/gulp-strip-debug)/[grunt](https://github.com/sindresorhus/grunt-strip-debug)/[broccoli](https://github.com/sindresorhus/broccoli-strip-debug) plugins.
 
 
-## Install
+## Usage
 
-```bash
+```sh
 $ npm install --save strip-debug
 ```
-
-
-## Usage
 
 ```js
 var stripDebug = require('strip-debug');
@@ -36,28 +33,24 @@ To prevent any side-effects, `console.*`/`alert*` is replaced with `void 0` inst
 
 ### input
 
-Type: `String`, `Object`
+Type: `string`, `object`
 
 Pass in a string of JavaScript code or a [Esprima compatible AST](http://esprima.org).
 
 
 ## CLI
 
-You can also use it as a CLI app by installing it globally:
-
-```bash
+```sh
 $ npm install --global strip-debug
 ```
 
-#### Usage
-
-```bash
+```sh
 $ strip-debug src/app.js > dist/app.js
 ```
 
 or pipe something to it:
 
-```bash
+```sh
 $ echo 'function foo(){console.log("bar")}' | strip-debug
 #=> function foo(){}
 ```
@@ -65,4 +58,4 @@ $ echo 'function foo(){console.log("bar")}' | strip-debug
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](http://sindresorhus.com)

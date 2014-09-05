@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 var fs = require('fs');
-var strip = require('./index');
+var strip = require('./');
 var input = process.argv[2];
 
 function getStdin(cb) {

@@ -1,6 +1,6 @@
 'use strict';
 var assert = require('assert');
-var stripDebug = require('./index');
+var stripDebug = require('./');
 
 it('should strip debugger statement', function () {
 	assert.equal(stripDebug('function test(){debugger;}').toString(), 'function test(){}');
