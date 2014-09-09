@@ -39,10 +39,10 @@
     "esprima"
   ],
   "dependencies": {
-    "rocambole": "^0.3.1",
-    "rocambole-strip-console": "^0.1.0",
-    "rocambole-strip-debugger": "^0.1.0",
-    "rocambole-strip-alert": "^0.1.0"
+    "rocambole": "^0.3.6",
+    "rocambole-strip-alert": "^0.1.1",
+    "rocambole-strip-console": "^1.0.0",
+    "rocambole-strip-debugger": "^1.0.0"
   },
   "devDependencies": {
     "mocha": "*"
