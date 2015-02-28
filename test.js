@@ -10,6 +10,7 @@ it('should strip debugger statement', function () {
 it('should strip console statement', function () {
 	assert.equal(stripDebug('function test(){console.log("foo");}').toString(), 'function test(){void 0;}');
 	assert.equal(stripDebug('function test(){window.console.log("foo");}').toString(), 'function test(){void 0;}');
+	assert.equal(stripDebug('var test = () => console.log("foo");').toString(), 'var test = () => void 0;');
 	assert.equal(stripDebug('"use strict";console.log("foo");foo()').toString(), '"use strict";void 0;foo()');
 	assert.equal(stripDebug('if(console){console.log("foo", "bar");}').toString(), 'if(console){void 0;}');
 	assert.equal(stripDebug('foo && console.log("foo");').toString(), 'foo && void 0;');
@@ -19,6 +20,7 @@ it('should strip console statement', function () {
 it('should strip alert statement', function () {
 	assert.equal(stripDebug('function test(){alert("foo");}').toString(), 'function test(){void 0;}');
 	assert.equal(stripDebug('function test(){window.alert("foo");}').toString(), 'function test(){void 0;}');
+	assert.equal(stripDebug('var test = () => alert("foo");').toString(), 'var test = () => void 0;');
 	assert.equal(stripDebug('"use strict";alert("foo");foo()').toString(), '"use strict";void 0;foo()');
 	assert.equal(stripDebug('if(alert){alert("foo", "bar");}').toString(), 'if(alert){void 0;}');
 	assert.equal(stripDebug('foo && alert("foo");').toString(), 'foo && void 0;');
