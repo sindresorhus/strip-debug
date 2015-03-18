@@ -9,7 +9,7 @@ Also available as [gulp](https://github.com/sindresorhus/gulp-strip-debug)/[grun
 
 ## Usage
 
-```sh
+```
 $ npm install --save strip-debug
 ```
 
@@ -40,11 +40,11 @@ Pass in a string of JavaScript code or a [Esprima compatible AST](http://esprima
 
 ## CLI
 
-```sh
+```
 $ npm install --global strip-debug
 ```
 
-```sh
+```
 $ strip-debug --help
 
   Usage
