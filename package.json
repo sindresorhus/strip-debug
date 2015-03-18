@@ -39,6 +39,8 @@
     "esprima"
   ],
   "dependencies": {
+    "get-stdin": "^4.0.1",
+    "meow": "^3.1.0",
     "rocambole": "^0.5.0",
     "rocambole-strip-alert": "^1.0.0",
     "rocambole-strip-console": "^1.0.0",

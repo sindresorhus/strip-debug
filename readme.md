@@ -45,14 +45,15 @@ $ npm install --global strip-debug
 ```
 
 ```sh
-$ strip-debug src/app.js > dist/app.js
-```
+$ strip-debug --help
 
-or pipe something to it:
+  Usage
+    $ strip-debug <input file> > <output file>
+    $ cat <input file> | strip-debug > <output file>
 
-```sh
-$ echo 'function foo(){console.log("bar")}' | strip-debug
-#=> function foo(){}
+  Example
+    $ strip-debug src/app.js > dist/app.js
+    $ cat src/app.js | strip-debug > dist/app.js
 ```
 
 
