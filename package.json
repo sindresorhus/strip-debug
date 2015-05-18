@@ -3,14 +3,12 @@
   "version": "1.1.1",
   "description": "Strip console, alert, and debugger statements from JavaScript code",
   "license": "MIT",
-  "bin": {
-    "strip-debug": "cli.js"
-  },
+  "bin": "cli.js",
   "repository": "sindresorhus/strip-debug",
   "author": {
     "name": "Sindre Sorhus",
     "email": "sindresorhus@gmail.com",
-    "url": "http://sindresorhus.com"
+    "url": "sindresorhus.com"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -23,6 +21,9 @@
     "cli.js"
   ],
   "keywords": [
+    "cli-app",
+    "cli",
+    "bin",
     "strip",
     "remove",
     "delete",
