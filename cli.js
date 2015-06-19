@@ -14,7 +14,7 @@ var cli = meow({
 		'Example',
 		'  $ strip-debug src/app.js > dist/app.js',
 		'  $ cat src/app.js | strip-debug > dist/app.js'
-	].join('\n')
+	]
 });
 
 if (process.stdin.isTTY) {
