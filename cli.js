@@ -5,17 +5,15 @@ var getStdin = require('get-stdin');
 var meow = require('meow');
 var strip = require('./');
 
-var cli = meow({
-	help: [
-		'Usage',
-		'  $ strip-debug <input file> > <output file>',
-		'  $ cat <input file> | strip-debug > <output file>',
-		'',
-		'Example',
-		'  $ strip-debug src/app.js > dist/app.js',
-		'  $ cat src/app.js | strip-debug > dist/app.js'
-	]
-});
+var cli = meow([
+	'Usage',
+	'  $ strip-debug <input file> > <output file>',
+	'  $ cat <input file> | strip-debug > <output file>',
+	'',
+	'Examples',
+	'  $ strip-debug src/app.js > dist/app.js',
+	'  $ cat src/app.js | strip-debug > dist/app.js'
+]);
 
 if (process.stdin.isTTY) {
 	if (!cli.input[0]) {

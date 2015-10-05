@@ -14,10 +14,10 @@ $ npm install --save strip-debug
 ```
 
 ```js
-var stripDebug = require('strip-debug');
+const stripDebug = require('strip-debug');
 
 stripDebug('function foo(){console.log("foo");alert("foo");debugger;}').toString();
-//=> function foo(){void 0;void 0;}
+//=> 'function foo(){void 0;void 0;}'
 ```
 
 

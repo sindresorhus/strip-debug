@@ -3,13 +3,13 @@
   "version": "1.1.1",
   "description": "Strip console, alert, and debugger statements from JavaScript code",
   "license": "MIT",
-  "bin": "cli.js",
   "repository": "sindresorhus/strip-debug",
   "author": {
     "name": "Sindre Sorhus",
     "email": "sindresorhus@gmail.com",
     "url": "sindresorhus.com"
   },
+  "bin": "cli.js",
   "engines": {
     "node": ">=0.10.0"
   },
@@ -41,7 +41,7 @@
   ],
   "dependencies": {
     "get-stdin": "^4.0.1",
-    "meow": "^3.3.0",
+    "meow": "^3.4.0",
     "rocambole": "^0.5.0",
     "rocambole-strip-alert": "^1.0.0",
     "rocambole-strip-console": "^1.0.0",
