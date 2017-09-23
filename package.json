@@ -1,46 +1,46 @@
 {
-	"name": "strip-debug",
-	"version": "1.1.1",
-	"description": "Strip console, alert, and debugger statements from JavaScript code",
-	"license": "MIT",
-	"repository": "sindresorhus/strip-debug",
-	"author": {
-		"name": "Sindre Sorhus",
-		"email": "sindresorhus@gmail.com",
-		"url": "sindresorhus.com"
-	},
-	"engines": {
-		"node": ">=4"
-	},
-	"scripts": {
-		"test": "xo && ava"
-	},
-	"files": [
-		"index.js"
-	],
-	"keywords": [
-		"strip",
-		"remove",
-		"delete",
-		"clean",
-		"debug",
-		"debugger",
-		"console",
-		"log",
-		"logging",
-		"js",
-		"javascript",
-		"ast",
-		"esprima"
-	],
-	"dependencies": {
-		"rocambole": "^0.7.0",
-		"rocambole-strip-alert": "^1.0.0",
-		"rocambole-strip-console": "^1.0.0",
-		"rocambole-strip-debugger": "^1.0.0"
-	},
-	"devDependencies": {
-		"ava": "*",
-		"xo": "*"
-	}
+  "name": "strip-debug",
+  "version": "2.0.0",
+  "description": "Strip console, alert, and debugger statements from JavaScript code",
+  "license": "MIT",
+  "repository": "sindresorhus/strip-debug",
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "sindresorhus.com"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "strip",
+    "remove",
+    "delete",
+    "clean",
+    "debug",
+    "debugger",
+    "console",
+    "log",
+    "logging",
+    "js",
+    "javascript",
+    "ast",
+    "esprima"
+  ],
+  "dependencies": {
+    "rocambole": "^0.7.0",
+    "rocambole-strip-alert": "^1.0.0",
+    "rocambole-strip-console": "^1.0.0",
+    "rocambole-strip-debugger": "^1.0.0"
+  },
+  "devDependencies": {
+    "ava": "*",
+    "xo": "*"
+  }
 }
