@@ -34,6 +34,8 @@ Call `.toString()` to get the stringified output.
 
 To prevent any side-effects, `console.*`/`alert*` is replaced with `void 0` instead of being stripped.
 
+If you shadow the `console` global with your own local variable, it will still be removed.
+
 ### input
 
 Type: `string` `Object`
