@@ -36,3 +36,7 @@ test('shouldn\'t leak memory', t => {
 		m('var obj = null; try { obj = \'something\'; } catch (e) { console.warn(\'NOPE!\'); }').toString();
 	});
 });
+
+test('supports async functions', t => {
+	t.is(m('async function test(){debugger; await foo();}').toString(), 'async function test(){ await foo();}');
+});
