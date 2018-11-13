@@ -11,9 +11,9 @@ rocambole.parseOptions = {
 	range: true,
 	tokens: true,
 	comment: true,
-	ecmaVersion: 2018,
+	ecmaVersion: 2019,
 	ecmaFeatures: {
-		jsx: false,
+		jsx: true,
 		globalReturn: false,
 		impliedStrict: false
 	}
