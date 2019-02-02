@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    ["../lib", {
+      "strip": [
+        "alert",
+        "window.alert",
+        "console.log",
+        "window.console.log",
+      ]
+    }]
+  ]
+}
