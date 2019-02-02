@@ -4,49 +4,60 @@
 
 Useful for making sure you didn't leave any logging in production code.
 
-Also available as [Gulp](https://github.com/sindresorhus/gulp-strip-debug)/[Grunt](https://github.com/sindresorhus/grunt-strip-debug)/[Broccoli](https://github.com/sindresorhus/broccoli-strip-debug) plugins.
+## Example
 
-
-## Usage
-
-```
-$ npm install strip-debug
-```
-
-
-## Usage
+**In**
 
 ```js
-const stripDebug = require('strip-debug');
-
-stripDebug('function foo(){console.log("foo");alert("foo");debugger;}').toString();
-//=> 'function foo(){void 0;void 0;}'
+function test(input) {
+	debugger
+	console.log(input)
+	input++
+	console.info(input)
+	return input
+}
 ```
 
+**Out**
 
-### API
+```js
+function test(input) {
+	input++
+	return input
+}
+```
 
-## stripDebug(input)
+## Installation
 
-Returns the modified [Esprima AST](http://esprima.org) which can be used to make additional modifications.
+```sh
+$ npm install babel-plugin-strip-debug
+```
 
-Call `.toString()` to get the stringified output.
+## Usage
 
-To prevent any side-effects, `console.*`/`alert*` is replaced with `void 0` instead of being stripped.
+### Via `.babelrc` (Recommended)
 
-If you shadow the `console` global with your own local variable, it will still be removed.
+**.babelrc**
 
-### input
+```json
+{
+	"plugins": ["strip-debug"]
+}
+```
 
-Type: `string` `Object`
+### Via CLI
 
-Pass in a string of JavaScript code or a [Esprima compatible AST](http://esprima.org).
+```sh
+$ babel --plugins strip-debug script.js
+```
 
+### Via Node API
 
-## Related
-
-- [strip-debug-cli](https://github.com/sindresorhus/strip-debug-cli) - API for this module
-
+```javascript
+require('babel-core').transform('code', {
+	plugins: ['strip-debug'],
+})
+```
 
 ## License
 
