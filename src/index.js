@@ -1,5 +1,12 @@
 'use strict';
 
+const stripFunctionNameList = [
+	'alert',
+	'window.alert',
+	'console.log',
+	'window.console.log'
+];
+
 export default function ({types: t}) {
 	return {
 		visitor: {
@@ -7,7 +14,6 @@ export default function ({types: t}) {
 				path.remove();
 			},
 			CallExpression(path) {
-				const stripFunctionNameList = this.opts.strip || [];
 				const isMatched = stripFunctionNameList.some(fnName => {
 					const calleePath = path.get('callee');
 					if (calleePath.matchesPattern(fnName)) {
