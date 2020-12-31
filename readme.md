@@ -1,4 +1,4 @@
-# strip-debug [![Build Status](https://travis-ci.org/sindresorhus/strip-debug.svg?branch=master)](https://travis-ci.org/sindresorhus/strip-debug)
+# strip-debug
 
 > Strip `console`, `alert`, and `debugger` statements from JavaScript code
 
