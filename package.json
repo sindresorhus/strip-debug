@@ -4,13 +4,14 @@
 	"description": "Strip console, alert, and debugger statements from JavaScript code",
 	"license": "MIT",
 	"repository": "sindresorhus/strip-debug",
+	"funding": "https://github.com/sponsors/sindresorhus",
 	"author": {
 		"name": "Sindre Sorhus",
 		"email": "sindresorhus@gmail.com",
-		"url": "sindresorhus.com"
+		"url": "https://sindresorhus.com"
 	},
 	"engines": {
-		"node": ">=6"
+		"node": ">=12"
 	},
 	"scripts": {
 		"test": "xo && ava"
@@ -34,14 +35,14 @@
 		"esprima"
 	],
 	"dependencies": {
-		"espree": "^4.1.0",
+		"espree": "^7.3.1",
 		"rocambole": "^0.7.0",
 		"rocambole-strip-alert": "^1.0.0",
 		"rocambole-strip-console": "^2.0.0",
-		"rocambole-strip-debugger": "^1.0.0"
+		"rocambole-strip-debugger": "^1.0.1"
 	},
 	"devDependencies": {
-		"ava": "^0.25.0",
-		"xo": "^0.23.0"
+		"ava": "^2.4.0",
+		"xo": "^0.38.2"
 	}
 }

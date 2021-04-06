@@ -1,5 +1,5 @@
 import test from 'ava';
-import stripDebug from '.';
+import stripDebug from './index.js';
 
 test('strip debugger statement', t => {
 	t.is(stripDebug('function test(){debugger;}').toString(), 'function test(){}');
@@ -14,6 +14,7 @@ test('strip console statement', t => {
 	t.is(stripDebug('if(console){console.log("foo", "bar");}').toString(), 'if(console){void 0;}');
 	t.is(stripDebug('foo && console.log("foo");').toString(), 'foo && void 0;');
 	t.is(stripDebug('if (foo) console.log("foo")\nnextLine();').toString(), 'if (foo) void 0\nnextLine();');
+	t.is(stripDebug('function test(){console.log(...colors);}').toString(), 'function test(){void 0;}');
 });
 
 test('strip alert statement', t => {
