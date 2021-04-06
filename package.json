@@ -1,6 +1,6 @@
 {
 	"name": "strip-debug",
-	"version": "4.0.0",
+	"version": "5.0.0",
 	"description": "Strip console, alert, and debugger statements from JavaScript code",
 	"license": "MIT",
 	"repository": "sindresorhus/strip-debug",
