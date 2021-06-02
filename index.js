@@ -1,26 +1,29 @@
-'use strict';
-const rocambole = require('rocambole');
-const stripDebugger = require('rocambole-strip-debugger');
-const stripConsole = require('rocambole-strip-console');
-const stripAlert = require('rocambole-strip-alert');
-const espree = require('espree');
+const stripFunctionNameList = [
+	'alert',
+	'window.alert',
+	'console.log',
+	'window.console.log'
+];
 
-rocambole.parseFn = espree.parse;
-rocambole.parseContext = espree;
-rocambole.parseOptions = {
-	range: true,
-	tokens: true,
-	comment: true,
-	ecmaVersion: 2019,
-	ecmaFeatures: {
-		jsx: true,
-		globalReturn: false,
-		impliedStrict: false
-	}
-};
+export default function stripDebugPlugin({types: t}) {
+	return {
+		visitor: {
+			DebuggerStatement(path) {
+				path.remove();
+			},
+			CallExpression(path) {
+				const isMatched = stripFunctionNameList.some(fnName => {
+					const calleePath = path.get('callee');
+					if (calleePath.matchesPattern(fnName)) {
+						return !calleePath.node.computed;
+					}
 
-module.exports = source => rocambole.moonwalk(source, node => {
-	stripDebugger(node);
-	stripConsole(node);
-	stripAlert(node);
-});
+					return calleePath.node.name === fnName;
+				});
+				if (isMatched) {
+					path.replaceWith(t.unaryExpression('void', t.numericLiteral(0)));
+				}
+			}
+		}
+	};
+}
