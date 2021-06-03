@@ -5,23 +5,23 @@ const stripFunctionNameList = [
 	'window.console.log'
 ];
 
-export default function stripDebugPlugin({types: t}) {
+export default function stripDebugPlugin({types}) {
 	return {
 		visitor: {
 			DebuggerStatement(path) {
 				path.remove();
 			},
 			CallExpression(path) {
-				const isMatched = stripFunctionNameList.some(fnName => {
+				const isMatched = stripFunctionNameList.some(functionName => {
 					const calleePath = path.get('callee');
-					if (calleePath.matchesPattern(fnName)) {
+					if (calleePath.matchesPattern(functionName)) {
 						return !calleePath.node.computed;
 					}
 
-					return calleePath.node.name === fnName;
+					return calleePath.node.name === functionName;
 				});
 				if (isMatched) {
-					path.replaceWith(t.unaryExpression('void', t.numericLiteral(0)));
+					path.replaceWith(types.unaryExpression('void', types.numericLiteral(0)));
 				}
 			}
 		}
