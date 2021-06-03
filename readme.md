@@ -17,7 +17,7 @@ import {transformSync} from '@babel/core';
 import stripDebug from 'strip-debug';
 
 transformSync('function foo(){console.log("foo");alert("foo");debugger;}', {
-  plugins: [stripDebug]
+	plugins: [stripDebug]
 }).code;
 //=> 'function foo() { void 0;void 0; }'
 ```
