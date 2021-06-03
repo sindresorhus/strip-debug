@@ -1,43 +1,56 @@
+import {transformAsync} from '@babel/core';
 import test from 'ava';
-import stripDebug from './index.js';
+import stripDebugPlugin from './index.js';
 
-test('strip debugger statement', t => {
-	t.is(stripDebug('function test(){debugger;}').toString(), 'function test(){}');
-	t.is(stripDebug('"use strict";debugger;foo()').toString(), '"use strict";foo()');
-});
-
-test('strip console statement', t => {
-	t.is(stripDebug('function test(){console.log("foo");}').toString(), 'function test(){void 0;}');
-	t.is(stripDebug('function test(){window.console.log("foo");}').toString(), 'function test(){void 0;}');
-	t.is(stripDebug('var test = () => console.log("foo");').toString(), 'var test = () => void 0;');
-	t.is(stripDebug('"use strict";console.log("foo");foo()').toString(), '"use strict";void 0;foo()');
-	t.is(stripDebug('if(console){console.log("foo", "bar");}').toString(), 'if(console){void 0;}');
-	t.is(stripDebug('foo && console.log("foo");').toString(), 'foo && void 0;');
-	t.is(stripDebug('if (foo) console.log("foo")\nnextLine();').toString(), 'if (foo) void 0\nnextLine();');
-	t.is(stripDebug('function test(){console.log(...colors);}').toString(), 'function test(){void 0;}');
-});
-
-test('strip alert statement', t => {
-	t.is(stripDebug('function test(){alert("foo");}').toString(), 'function test(){void 0;}');
-	t.is(stripDebug('function test(){window.alert("foo");}').toString(), 'function test(){void 0;}');
-	t.is(stripDebug('var test = () => alert("foo");').toString(), 'var test = () => void 0;');
-	t.is(stripDebug('"use strict";alert("foo");foo()').toString(), '"use strict";void 0;foo()');
-	t.is(stripDebug('if(alert){alert("foo", "bar");}').toString(), 'if(alert){void 0;}');
-	t.is(stripDebug('foo && alert("foo");').toString(), 'foo && void 0;');
-	t.is(stripDebug('if (foo) alert("foo")\nnextLine();').toString(), 'if (foo) void 0\nnextLine();');
-});
-
-test('never strip away non-debugging code', t => {
-	const fixture = 'var test = {\n    getReadSections: function(){\n        var readSections = window.localStorage.getItestripDebug(\'storyReadSections\') || \'[]\';\n        return JSON.parse(readSections);\n    }\n};';
-	t.is(stripDebug(fixture).toString(), fixture);
-});
-
-test('shouldn\'t leak memory', t => {
-	t.notThrows(() => {
-		stripDebug('var obj = null; try { obj = \'something\'; } catch (e) { console.warn(\'NOPE!\'); }').toString();
+async function stripDebug(source) {
+	const {code} = await transformAsync(source, {
+		plugins: [stripDebugPlugin]
 	});
+	return code;
+}
+
+test('strip debugger statement', async t => {
+	t.is(await stripDebug('function test(){debugger;}'), 'function test() {}');
+	t.is(await stripDebug('"use strict";debugger;foo()'), '"use strict";\n\nfoo();');
 });
 
-test('supports async functions', t => {
-	t.is(stripDebug('async function test(){debugger; await foo();}').toString(), 'async function test(){ await foo();}');
+test('strip console statement', async t => {
+	t.is(await stripDebug('function test(){console.log("foo");}'), 'function test() {\n  void 0;\n}');
+	t.is(await stripDebug('function test(){window.console.log("foo");}'), 'function test() {\n  void 0;\n}');
+	t.is(await stripDebug('var test = () => console.log("foo");'), 'var test = () => void 0;');
+	t.is(await stripDebug('"use strict";console.log("foo");foo()'), '"use strict";\n\nvoid 0;\nfoo();');
+	t.is(await stripDebug('if(console){console.log("foo", "bar");}'), 'if (console) {\n  void 0;\n}');
+	t.is(await stripDebug('foo && console.log("foo");'), 'foo && void 0;');
+	t.is(await stripDebug('if (foo) console.log("foo")\nnextLine();'), 'if (foo) void 0;\nnextLine();');
+	t.is(await stripDebug('function test(){console.log(...colors);}'), 'function test() {\n  void 0;\n}');
+});
+
+test('strip alert statement', async t => {
+	t.is(await stripDebug('function test(){alert("foo");}'), 'function test() {\n  void 0;\n}');
+	t.is(await stripDebug('function test(){window.alert("foo");}'), 'function test() {\n  void 0;\n}');
+	t.is(await stripDebug('var test = () => alert("foo");'), 'var test = () => void 0;');
+	t.is(await stripDebug('"use strict";alert("foo");foo()'), '"use strict";\n\nvoid 0;\nfoo();');
+	t.is(await stripDebug('if(alert){alert("foo", "bar");}'), 'if (alert) {\n  void 0;\n}');
+	t.is(await stripDebug('foo && alert("foo");'), 'foo && void 0;');
+	t.is(await stripDebug('if (foo) alert("foo")\nnextLine();'), 'if (foo) void 0;\nnextLine();');
+});
+
+test('never strip away non-debugging code', async t => {
+	const fixture = `var test = {
+  getReadSections: function () {
+    var readSections = window.localStorage.getItestripDebug('storyReadSections') || '[]';
+    return JSON.parse(readSections);
+  }
+};`;
+	t.is(await stripDebug(fixture), fixture);
+});
+
+test('shouldn\'t leak memory', async t => {
+	await t.notThrowsAsync(() =>
+		stripDebug('var obj = null; try { obj = \'something\'; } catch (e) { console.warn(\'NOPE!\'); }')
+	);
+});
+
+test('supports async functions', async t => {
+	t.is(await stripDebug('async function test(){debugger; await foo();}'), 'async function test() {\n  await foo();\n}');
 });
