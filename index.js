@@ -20,6 +20,7 @@ export default function stripDebugPlugin({types}) {
 
 					return calleePath.node.name === functionName;
 				});
+
 				if (isMatched) {
 					path.replaceWith(types.unaryExpression('void', types.numericLiteral(0)));
 				}

@@ -6,6 +6,7 @@ async function stripDebug(source) {
 	const {code} = await transformAsync(source, {
 		plugins: [stripDebugPlugin]
 	});
+
 	return code;
 }
 
