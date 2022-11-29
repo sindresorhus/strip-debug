@@ -1,4 +1,4 @@
-import {PluginObj, types} from '@babel/core';
+import {type PluginObj, type types} from '@babel/core';
 
 /**
 Strip `console`, `alert`, and `debugger` statements from JavaScript code.

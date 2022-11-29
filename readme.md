@@ -6,8 +6,8 @@ Useful for making sure you didn't leave any logging in production code.
 
 ## Usage
 
-```
-$ npm install @babel/core strip-debug
+```sh
+npm install @babel/core strip-debug
 ```
 
 ## Usage

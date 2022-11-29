@@ -4,7 +4,7 @@ import stripDebugPlugin from './index.js';
 
 async function stripDebug(source) {
 	const {code} = await transformAsync(source, {
-		plugins: [stripDebugPlugin]
+		plugins: [stripDebugPlugin],
 	});
 
 	return code;
@@ -53,7 +53,7 @@ test('never strip away non-debugging code', async t => {
 
 test('shouldn\'t leak memory', async t => {
 	await t.notThrowsAsync(() =>
-		stripDebug('var obj = null; try { obj = \'something\'; } catch (e) { console.warn(\'NOPE!\'); }')
+		stripDebug('var obj = null; try { obj = \'something\'; } catch (e) { console.warn(\'NOPE!\'); }'),
 	);
 });
 

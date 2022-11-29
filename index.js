@@ -55,7 +55,7 @@ export default function stripDebugPlugin({types}) {
 				if (isConsoleNode(path) || isAlertNode(path)) {
 					path.replaceWith(types.unaryExpression('void', types.numericLiteral(0)));
 				}
-			}
-		}
+			},
+		},
 	};
 }
