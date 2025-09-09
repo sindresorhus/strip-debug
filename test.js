@@ -56,8 +56,7 @@ test('never strip away non-debugging code', async t => {
 
 test('shouldn\'t leak memory', async t => {
 	await t.notThrowsAsync(() =>
-		stripDebug('var obj = null; try { obj = \'something\'; } catch (e) { console.warn(\'NOPE!\'); }'),
-	);
+		stripDebug('var obj = null; try { obj = \'something\'; } catch (e) { console.warn(\'NOPE!\'); }'));
 });
 
 test('supports async functions', async t => {

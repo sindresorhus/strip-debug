@@ -17,7 +17,7 @@
 	},
 	"sideEffects": false,
 	"engines": {
-		"node": ">=14.16"
+		"node": ">=20"
 	},
 	"scripts": {
 		"test": "xo && ava"
@@ -41,11 +41,11 @@
 		"babel-plugin"
 	],
 	"dependencies": {
-		"@types/babel__core": "^7.1.20"
+		"@types/babel__core": "^7.20.5"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.20.5",
-		"ava": "^5.1.0",
-		"xo": "^0.53.1"
+		"@babel/core": "^7.28.4",
+		"ava": "^6.4.1",
+		"xo": "^1.2.2"
 	}
 }
