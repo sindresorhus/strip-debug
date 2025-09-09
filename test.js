@@ -5,6 +5,9 @@ import stripDebugPlugin from './index.js';
 async function stripDebug(source) {
 	const {code} = await transformAsync(source, {
 		plugins: [stripDebugPlugin],
+		parserOpts: {
+			attachComment: true,
+		},
 	});
 
 	return code;
@@ -59,4 +62,74 @@ test('shouldn\'t leak memory', async t => {
 
 test('supports async functions', async t => {
 	t.is(await stripDebug('async function test(){debugger; await foo();}'), 'async function test() {\n  await foo();\n}');
+});
+
+test('ignore with strip-debug-ignore-next comment', async t => {
+	t.is(
+		await stripDebug(`function test() {
+	// strip-debug-ignore-next
+	console.log('preserved');
+	console.log('removed');
+}`),
+		`function test() {
+  // strip-debug-ignore-next
+  console.log('preserved');
+  void 0;
+}`,
+	);
+});
+
+test('ignore with strip-debug-ignore inline comment', async t => {
+	t.is(
+		await stripDebug(`function test() {
+	console.log('preserved'); // strip-debug-ignore
+	console.log('removed');
+}`),
+		`function test() {
+  console.log('preserved'); // strip-debug-ignore
+  void 0;
+}`,
+	);
+});
+
+test('ignore debugger statements', async t => {
+	t.is(
+		await stripDebug(`function test() {
+	// strip-debug-ignore-next
+	debugger;
+	debugger;
+}`),
+		`function test() {
+  // strip-debug-ignore-next
+  debugger;
+}`,
+	);
+});
+
+test('ignore alert statements', async t => {
+	t.is(
+		await stripDebug(`function test() {
+	alert('preserved'); // strip-debug-ignore
+	alert('removed');
+}`),
+		`function test() {
+  alert('preserved'); // strip-debug-ignore
+  void 0;
+}`,
+	);
+});
+
+test('ignore with block comments', async t => {
+	t.is(
+		await stripDebug(`function test() {
+	/* strip-debug-ignore-next */
+	console.log('preserved');
+	console.log('removed');
+}`),
+		`function test() {
+  /* strip-debug-ignore-next */
+  console.log('preserved');
+  void 0;
+}`,
+	);
 });

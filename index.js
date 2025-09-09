@@ -43,16 +43,34 @@ function isAlertNode(path) {
 }
 
 /**
+Check if a node should be ignored based on comments.
+
+@param {import('@babel/core').NodePath} path - The node path to check.
+@returns {boolean} True if the node should be ignored.
+*/
+function shouldIgnore(path) {
+	const leadingComments = [...(path.node.leadingComments || []), ...(path.parent?.leadingComments || [])];
+	const trailingComments = [...(path.node.trailingComments || []), ...(path.parent?.trailingComments || [])];
+
+	const hasIgnoreNext = leadingComments.some(comment => comment.value.includes('strip-debug-ignore-next'));
+	const hasIgnore = trailingComments.some(comment => comment.value.includes('strip-debug-ignore'));
+
+	return hasIgnoreNext || hasIgnore;
+}
+
+/**
 @returns {import('@babel/core').PluginObj}
 */
 export default function stripDebugPlugin({types}) {
 	return {
 		visitor: {
 			DebuggerStatement(path) {
-				path.remove();
+				if (!shouldIgnore(path)) {
+					path.remove();
+				}
 			},
 			CallExpression(path) {
-				if (isConsoleNode(path) || isAlertNode(path)) {
+				if ((isConsoleNode(path) || isAlertNode(path)) && !shouldIgnore(path)) {
 					path.replaceWith(types.unaryExpression('void', types.numericLiteral(0)));
 				}
 			},
